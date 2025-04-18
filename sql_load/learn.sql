@@ -41,6 +41,8 @@ order by
     total_jobs 
 ;
 
+
+
 with skill_job_postings as (
     select 
         skills_job_dim.skill_id, count(*) as total_jobs
@@ -107,3 +109,17 @@ select
     first_quarter_of_the_year.job_posted_date::date
 from(
     select *
+
+    from january
+    union ALL
+    select *
+    from fabreuary
+    union ALL
+    select *
+    from march
+) as first_quarter_of_the_year
+where first_quarter_of_the_year.salary_year_avg > 70000 and 
+    job_title_short = 'Data Analyst'
+order BY
+    first_quarter_of_the_year.salary_year_avg desc
+;
